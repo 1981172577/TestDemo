@@ -4,7 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
-import com.migrsoft.posbusiness.R;
+import com.tang.testdemo.R;
+
 
 public class MainActivity extends AppCompatActivity {
 

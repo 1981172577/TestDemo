@@ -1,8 +1,8 @@
 package com.tang.testdemo.utils;
 
 
-import com.migrsoft.posbusiness.BuildConfig;
 import com.orhanobut.logger.Logger;
+import com.tang.testdemo.BuildConfig;
 
 public class LogUtils {
 

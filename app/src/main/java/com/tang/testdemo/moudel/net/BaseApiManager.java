@@ -1,6 +1,7 @@
 package com.tang.testdemo.moudel.net;
 
-import com.migrsoft.posbusiness.utils.LogUtils;
+
+import com.tang.testdemo.utils.LogUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
