@@ -3,17 +3,20 @@ package com.tang.testdemo.app;
 import android.support.multidex.MultiDexApplication;
 
 import com.squareup.leakcanary.LeakCanary;
-import com.tang.testdemo.moudel.net.ApiManager;
+import com.tang.testdemo.dagger.Component.AppComponent;
+import com.tang.testdemo.dagger.Component.DaggerAppComponent;
+import com.tang.testdemo.dagger.Module.AppMoudle;
 
-import javax.inject.Inject;
 
 
 public class MyApplication  extends MultiDexApplication {
 
     private static MyApplication INSTANCE = null;
 
-    @Inject
-    ApiManager apiManager;
+    private AppComponent appComponent;
+
+//    @Inject
+//    ApiManager apiManager;
 
     @Override
     public void onCreate() {
@@ -24,8 +27,16 @@ public class MyApplication  extends MultiDexApplication {
             return;
         }
         LeakCanary.install(this);
-        DaggerAppComponent.create().inject(this);
+//        DaggerAppComponent.create().inject(this);
         INSTANCE = this;
+
+        appComponent = DaggerAppComponent.builder()
+                .AppMoudle(new AppMoudle(this))
+                .bindApplication(this)
+                .build();
+        appComponent.inject(this);
+
+
     }
 
 
@@ -33,8 +44,12 @@ public class MyApplication  extends MultiDexApplication {
         return INSTANCE;
     }
 
-    public ApiManager getApiManager(){
-        return apiManager;
+    public AppComponent getAppComponent() {
+        return appComponent;
     }
+
+    //    public ApiManager getApiManager(){
+//        return apiManager;
+//    }
 
 }

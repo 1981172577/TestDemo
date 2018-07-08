@@ -4,6 +4,9 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+//apply plugin: 'com.jakewharton.butterknife'
+
+
 android {
     compileSdkVersion 26
     buildToolsVersion '27.0.3'
@@ -47,7 +50,7 @@ dependencies {
     implementation "android.arch.lifecycle:reactivestreams:$android_arch"
     implementation "android.arch.persistence.room:runtime:$android_arch"
     implementation "android.arch.persistence.room:rxjava2:$android_arch"
-    implementation "android.arch.lifecycle:common-java8:$android_arch"
+    implementation "android.arch.lifecycle:common-java8:$android_arch_java"
     implementation "android.arch.lifecycle:reactivestreams:$android_arch"
 
     //------lifecycle end------
@@ -75,7 +78,7 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger2"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger2"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     implementation 'de.hannesstruss.rxcache:rxcache:1.1'
