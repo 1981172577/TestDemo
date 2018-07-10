@@ -6,30 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity">
 
-  <android.support.v4.view.ViewPager
+  <com.tang.testdemo.ui.widget.NoScrollViewpager
       android:id="@+id/viewpager"
       android:layout_width="match_parent"
       android:layout_height="0dp"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintBottom_toTopOf="@+id/design_bottom_sheet"
-      app:layout_constraintTop_toTopOf="parent">
+      app:layout_constraintTop_toTopOf="parent"/>
 
-
-
-  </android.support.v4.view.ViewPager>
-
-
-    <android.support.design.widget.BottomNavigationView
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
         android:id="@+id/design_bottom_sheet"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        app:bnbMode="mode_shifting"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/viewpager"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-
-    </android.support.design.widget.BottomNavigationView>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

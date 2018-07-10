@@ -1,13 +1,16 @@
 package com.tang.testdemo.utils;
 
 
-import android.util.Log;
 
+import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 import com.tang.testdemo.BuildConfig;
 
 public class LogUtils {
 
+    static {
+        Logger.addLogAdapter(new AndroidLogAdapter());
+    }
 
     public static void i(String msg){
         if (BuildConfig.DEBUG)
@@ -20,7 +23,6 @@ public class LogUtils {
     }
 
     public static void e(String msg){
-        Log.e("-----",msg);
         if (BuildConfig.DEBUG)
         Logger.e(msg);
     }

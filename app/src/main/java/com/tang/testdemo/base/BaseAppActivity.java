@@ -1,4 +1,4 @@
-package com.tang.testdemo.ui.base;
+package com.tang.testdemo.base;
 
 import android.content.Context;
 import android.graphics.Color;

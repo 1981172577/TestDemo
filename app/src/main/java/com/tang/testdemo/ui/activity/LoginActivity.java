@@ -11,12 +11,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.tang.testdemo.R;
-import com.tang.testdemo.bean.LoginBean;
+import com.tang.testdemo.base.BaseAppActivity;
+import com.tang.testdemo.bean.User;
 import com.tang.testdemo.dagger.Component.AppComponent;
 import com.tang.testdemo.dagger.Component.DaggerLoginComponent;
 import com.tang.testdemo.dagger.Component.LoginComponent;
 import com.tang.testdemo.moudel.viewModel.LoginViewModel;
-import com.tang.testdemo.ui.base.BaseAppActivity;
 
 import javax.inject.Inject;
 
@@ -67,12 +67,12 @@ public class LoginActivity extends BaseAppActivity {
         loginViewModel.getLoginBean().observe(this, loginObserver);
     }
 
-    private Observer loginObserver = (Observer<LoginBean>) loginBean -> {
-        if (loginBean != null && !TextUtils.isEmpty(loginBean.getMemPin())) {
+    private Observer loginObserver = (Observer<User>) user -> {
+        if (user != null && !TextUtils.isEmpty(user.getMemPin())) {
             startActivity(new Intent(mContext, MainActivity.class));
             finish();
         } else {
-            String resultMas = loginBean != null ? loginBean.getErrorMsg() : "";
+            String resultMas = user != null ? user.getErrorMsg() : "";
             Toast.makeText(mContext, getString(R.string.login_error, resultMas), Toast.LENGTH_SHORT).show();
         }
     };

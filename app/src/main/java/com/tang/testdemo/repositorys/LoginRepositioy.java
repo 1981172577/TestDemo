@@ -1,14 +1,12 @@
 package com.tang.testdemo.repositorys;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.tang.testdemo.api.LoginApi;
-import com.tang.testdemo.bean.LoginBean;
 import com.tang.testdemo.bean.RespossenBean;
-import com.tang.testdemo.utils.LogUtils;
+import com.tang.testdemo.bean.User;
 import com.tang.testdemo.utils.RxScheduleMapper;
 
 import java.util.HashMap;
@@ -29,7 +27,7 @@ public class LoginRepositioy implements BaseRepository {
 
     private Gson gson;
 
-    private MutableLiveData<LoginBean> loginBeanMutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<User> loginBeanMutableLiveData = new MutableLiveData<>();
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
@@ -41,7 +39,7 @@ public class LoginRepositioy implements BaseRepository {
                 .create();
     }
 
-    public MutableLiveData<LoginBean> login(String phone,String pwd){
+    public MutableLiveData<User> login(String phone,String pwd){
         Observable.just(pwd)
                 .flatMap((Function<String, ObservableSource<RespossenBean>>) s -> {
                     Map<String,String> requestMap = new HashMap<>();
@@ -56,7 +54,7 @@ public class LoginRepositioy implements BaseRepository {
         return loginBeanMutableLiveData;
     }
 
-    public MutableLiveData<LoginBean> getLoginBeanMutableLiveData(){
+    public MutableLiveData<User> getLoginBeanMutableLiveData(){
         return loginBeanMutableLiveData;
     }
 
@@ -68,11 +66,11 @@ public class LoginRepositioy implements BaseRepository {
         @Override
         public void onNext(RespossenBean respossenBean) {
             if (RespossenBean.SUCCESS == respossenBean.getReturnCode()) {
-                LoginBean result = gson.fromJson(respossenBean.getReturnData(),LoginBean.class);
+                User result = gson.fromJson(respossenBean.getReturnData(),User.class);
                 loginBeanMutableLiveData.setValue(result);
-                saveLoginInfo(result);
+                cacheRepository.put(result).commit();
             }else{
-                LoginBean result = new LoginBean.Builder()
+                User result = new User.Builder()
                         .errorMsg(respossenBean.getReturnMsg())
                         .build();
                 loginBeanMutableLiveData.setValue(result);
@@ -93,11 +91,5 @@ public class LoginRepositioy implements BaseRepository {
         compositeDisposable.dispose();
     }
 
-    private void saveLoginInfo(LoginBean loginBean){
-        if(loginBean == null){
-            return;
-        }
-        cacheRepository.put(LoginBean.LOGIN_KEY,loginBean);
-    }
 
 }

@@ -4,6 +4,7 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 
 
+import com.tang.testdemo.bean.User;
 import com.tang.testdemo.moudel.cache.Editor;
 import com.tang.testdemo.repositorys.CacheRepository;
 
@@ -49,18 +50,18 @@ public class CacheRepositoryImpl implements CacheRepository {
         this.mPool = workersPool;
     }
 
-//    @Override
-//    public Editor put(User user) {
-//        String key = getKey(User.class);
-//        return put(key, user);
-//    }
+    @Override
+    public Editor put(User user) {
+        String key = getKey(User.class);
+        return put(key, user);
+    }
 
-//    @Override
-//    public User getLoginedUser() {
-//        String key = getKey(User.class);
-//        Serializable serializable = getAsSerializable(key);
-//        return serializable instanceof User ? (User) serializable : null;
-//    }
+    @Override
+    public User getLoginedUser() {
+        String key = getKey(User.class);
+        Serializable serializable = getAsSerializable(key);
+        return serializable instanceof User ? (User) serializable : null;
+    }
 
 //    @Override
 //    public Editor put(Register value) {

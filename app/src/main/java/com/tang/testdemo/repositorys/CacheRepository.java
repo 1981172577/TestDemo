@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
 
+import com.tang.testdemo.bean.User;
 import com.tang.testdemo.moudel.cache.Editor;
 
 import java.io.Serializable;
@@ -22,14 +23,14 @@ public interface CacheRepository {
      * @param user
      * @return
      */
-//    Editor put(User user);
+    Editor put(User user);
 
     /**
      * 获取当前登陆账号的信息,从内存中读取同步返回，无IO操作
      *
      * @return 当前登陆账号的信息
      */
-//    User getLoginedUser();
+    User getLoginedUser();
 
     /**
      * 保存绑定的POS机信息

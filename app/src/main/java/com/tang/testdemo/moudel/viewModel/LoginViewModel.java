@@ -3,7 +3,7 @@ package com.tang.testdemo.moudel.viewModel;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.tang.testdemo.bean.LoginBean;
+import com.tang.testdemo.bean.User;
 import com.tang.testdemo.repositorys.LoginRepositioy;
 
 public class LoginViewModel extends ViewModel {
@@ -14,11 +14,11 @@ public class LoginViewModel extends ViewModel {
         this.loginRepositioy = loginRepositioy;
     }
 
-    public MutableLiveData<LoginBean> getLoginBean(){
+    public MutableLiveData<User> getLoginBean(){
         return  loginRepositioy.getLoginBeanMutableLiveData();
     }
 
-    public MutableLiveData<LoginBean> login(String userName,String pwd){
+    public MutableLiveData<User> login(String userName,String pwd){
         return loginRepositioy.login(userName,pwd);
     }
 

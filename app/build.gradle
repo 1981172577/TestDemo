@@ -83,4 +83,5 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     implementation 'de.hannesstruss.rxcache:rxcache:1.1'
     implementation 'com.orhanobut:logger:2.2.0'
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.4'
 }

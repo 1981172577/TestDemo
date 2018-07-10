@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">TestDemo</string>
     <string name="login_error">登录失败%1$s</string>
+    <string name="title_home">首页</string>
+    <string name="title_shopCar">购物车</string>
+    <string name="title_catgray">分类</string>
+    <string name="title_person">我的</string>
 </resources>
