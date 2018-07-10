@@ -109,6 +109,7 @@
             android:layout_margin="28dp"
             android:layout_below="@id/login_set_rl"
             android:gravity="center"
+            android:enabled="false"
             android:text="登录" />
 
         <Button

@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import com.tang.testdemo.api.LoginApi;
 import com.tang.testdemo.bean.LoginBean;
 import com.tang.testdemo.bean.RespossenBean;
+import com.tang.testdemo.utils.LogUtils;
 import com.tang.testdemo.utils.RxScheduleMapper;
 
 import java.util.HashMap;
@@ -40,13 +41,15 @@ public class LoginRepositioy implements BaseRepository {
                 .create();
     }
 
-    LiveData<LoginBean> login(String phone,String pwd){
+    public MutableLiveData<LoginBean> login(String phone,String pwd){
         Observable.just(pwd)
                 .flatMap((Function<String, ObservableSource<RespossenBean>>) s -> {
                     Map<String,String> requestMap = new HashMap<>();
+                    Map<String, String> result = new HashMap<String, String>();
                     requestMap.put("phoneNo",phone);
                     requestMap.put("password",s);
-                    return loginApi.verificationLogin(requestMap);
+                    result.put("reqJson",gson.toJson(requestMap));
+                    return loginApi.verificationLogin(result);
                 })
                 .compose(RxScheduleMapper.io2main())
                 .subscribe(new MyLoginApiService());
@@ -77,10 +80,8 @@ public class LoginRepositioy implements BaseRepository {
         }
         @Override
         public void onError(Throwable e) {
-            LoginBean result = new LoginBean.Builder()
-                    .errorMsg(null)
-                    .build();
-            loginBeanMutableLiveData.setValue(result);
+            e.printStackTrace();
+            loginBeanMutableLiveData.setValue(null);
         }
         @Override
         public void onComplete() {

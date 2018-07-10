@@ -12,7 +12,7 @@ public class LoginBean implements Serializable{
 
     private String token;
 
-    private String mempin;
+    private String memPin;
 
     private String phoneNo;
 
@@ -34,7 +34,7 @@ public class LoginBean implements Serializable{
         setVnedorId(builder.vnedorId);
         setStoreCode(builder.storeCode);
         setToken(builder.token);
-        setMempin(builder.mempin);
+        setMemPin(builder.mempin);
         setPhoneNo(builder.phoneNo);
         setAccount(builder.account);
         setMemNo(builder.memNo);
@@ -77,12 +77,12 @@ public class LoginBean implements Serializable{
         this.token = token;
     }
 
-    public String getMempin() {
-        return mempin;
+    public String getMemPin() {
+        return memPin;
     }
 
-    public void setMempin(String mempin) {
-        this.mempin = mempin;
+    public void setMemPin(String mempin) {
+        this.memPin = mempin;
     }
 
     public String getPhoneNo() {
@@ -140,7 +140,7 @@ public class LoginBean implements Serializable{
                 "vnedorId=" + vnedorId +
                 ", storeCode='" + storeCode + '\'' +
                 ", token='" + token + '\'' +
-                ", mempin='" + mempin + '\'' +
+                ", mempin='" + memPin + '\'' +
                 ", phoneNo='" + phoneNo + '\'' +
                 ", account='" + account + '\'' +
                 ", memNo='" + memNo + '\'' +
