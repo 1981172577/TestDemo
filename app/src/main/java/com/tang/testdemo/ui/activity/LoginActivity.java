@@ -1,7 +1,10 @@
 package com.tang.testdemo.ui.activity;
 
+import android.app.ActivityOptions;
 import android.arch.lifecycle.Observer;
 import android.content.Intent;
+import android.os.Build;
+import android.support.design.widget.FloatingActionButton;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.view.View;
@@ -27,16 +30,14 @@ import butterknife.OnTextChanged;
 
 public class LoginActivity extends BaseAppActivity {
 
-    @BindView(R.id.loginimg)
-    ImageView loginimg;
-    @BindView(R.id.login_useredt)
+    @BindView(R.id.et_username)
     EditText loginUseredt;
-    @BindView(R.id.login_pwdedt)
+    @BindView(R.id.et_password)
     EditText loginPwdedt;
-    @BindView(R.id.login_btn)
+    @BindView(R.id.bt_go)
     Button loginBtn;
-    @BindView(R.id.register_btn_lv)
-    Button registerBtnLv;
+    @BindView(R.id.fab)
+    FloatingActionButton registerBtnLv;
 
     private LoginComponent loginComponent;
 
@@ -77,7 +78,7 @@ public class LoginActivity extends BaseAppActivity {
         }
     };
 
-    @OnTextChanged(value = {R.id.login_useredt, R.id.login_pwdedt},
+    @OnTextChanged(value = {R.id.et_username, R.id.et_password},
             callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     public void onLoginTextChange() {
         Editable userName = loginUseredt.getText();
@@ -86,13 +87,23 @@ public class LoginActivity extends BaseAppActivity {
     }
 
 
-    @OnClick({R.id.login_btn, R.id.register_btn_lv})
+    @OnClick({R.id.bt_go, R.id.fab})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.login_btn:
+            case R.id.bt_go:
                 checkUser();
                 break;
-            case R.id.register_btn_lv:
+            case R.id.fab:
+                getWindow().setExitTransition(null);
+                getWindow().setEnterTransition(null);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions options =
+                            ActivityOptions.makeSceneTransitionAnimation(this,registerBtnLv,registerBtnLv.getTransitionName());
+                    startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
+                } else {
+                    startActivity(new Intent(this, RegisterActivity.class));
+                }
                 break;
         }
     }
