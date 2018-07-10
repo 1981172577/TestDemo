@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.CardView;
 import android.transition.Transition;
@@ -43,9 +44,16 @@ public class RegisterActivity extends BaseAppActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             ShowEnterAnimation();
         }
-        fab.setOnClickListener(v -> animateRevealClose());
+        fab.setOnClickListener(v -> {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                animateRevealClose();
+            }else{
+                finish();
+            }
+        });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void ShowEnterAnimation() {
         Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.fabtransition);
         getWindow().setSharedElementEnterTransition(transition);
@@ -81,6 +89,7 @@ public class RegisterActivity extends BaseAppActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void animateRevealShow() {
         Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd, cvAdd.getWidth()/2,0, fab.getWidth() / 2, cvAdd.getHeight());
         mAnimator.setDuration(500);
@@ -100,6 +109,7 @@ public class RegisterActivity extends BaseAppActivity {
         mAnimator.start();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void animateRevealClose() {
         Animator mAnimator = ViewAnimationUtils.createCircularReveal(cvAdd,cvAdd.getWidth()/2,0, cvAdd.getHeight(), fab.getWidth() / 2);
         mAnimator.setDuration(500);
@@ -122,6 +132,10 @@ public class RegisterActivity extends BaseAppActivity {
     }
     @Override
     public void onBackPressed() {
-        animateRevealClose();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            animateRevealClose();
+        }else{
+            super.onBackPressed();
+        }
     }
 }

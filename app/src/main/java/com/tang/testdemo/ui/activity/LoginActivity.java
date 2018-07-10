@@ -94,10 +94,9 @@ public class LoginActivity extends BaseAppActivity {
                 checkUser();
                 break;
             case R.id.fab:
-                getWindow().setExitTransition(null);
-                getWindow().setEnterTransition(null);
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    getWindow().setExitTransition(null);
+                    getWindow().setEnterTransition(null);
                     ActivityOptions options =
                             ActivityOptions.makeSceneTransitionAnimation(this,registerBtnLv,registerBtnLv.getTransitionName());
                     startActivity(new Intent(this, RegisterActivity.class), options.toBundle());
