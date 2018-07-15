@@ -1,11 +1,21 @@
 package com.tang.testdemo.ui.activity;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.tang.testdemo.R;
 import com.tang.testdemo.base.BaseAppActivity;
 import com.tang.testdemo.dagger.Component.AppComponent;
+import com.tang.testdemo.ui.fragment.CartGrayFragment;
+import com.tang.testdemo.ui.fragment.HomeFragment;
+import com.tang.testdemo.ui.fragment.OrderFragment;
+import com.tang.testdemo.ui.fragment.PersonFragment;
 import com.tang.testdemo.ui.widget.NoScrollViewpager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -17,6 +27,8 @@ public class MainActivity extends BaseAppActivity implements BottomNavigationBar
     NoScrollViewpager viewpager;
     @BindView(R.id.design_bottom_sheet)
     BottomNavigationBar bottomNavigationBar;
+
+    private List<Fragment> fragmentList = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -31,6 +43,17 @@ public class MainActivity extends BaseAppActivity implements BottomNavigationBar
     protected void initView() {
         ButterKnife.bind(this);
         initBottomBar();
+        initFragments();
+    }
+
+    private void initFragments() {
+        fragmentList.add(new HomeFragment());
+        fragmentList.add(new CartGrayFragment());
+        fragmentList.add(new OrderFragment());
+        fragmentList.add(new PersonFragment());
+
+        viewpager.setAdapter(mAdapter);
+        viewpager.setOffscreenPageLimit(4);
     }
 
     private void initBottomBar() {
@@ -48,7 +71,9 @@ public class MainActivity extends BaseAppActivity implements BottomNavigationBar
 
     @Override
     public void onTabSelected(int position) {
-
+        if(fragmentList != null && fragmentList.size() > 0  && position < fragmentList.size()){
+            viewpager.setCurrentItem(position);
+        }
     }
 
     @Override
@@ -60,4 +85,15 @@ public class MainActivity extends BaseAppActivity implements BottomNavigationBar
     public void onTabReselected(int position) {
 
     }
+
+    FragmentPagerAdapter mAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
+        @Override
+        public Fragment getItem(int position) {
+            return fragmentList.get(position);
+        }
+        @Override
+        public int getCount() {
+            return fragmentList.size();
+        }
+    };
 }

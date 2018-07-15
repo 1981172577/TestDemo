@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="home_item_name">
+        <item>最新商品</item>
+        <item>促销商品</item>
+        <item>收藏商品</item>
+        <item>最近购买</item>
+    </array>
+</resources>

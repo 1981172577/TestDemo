@@ -29,8 +29,6 @@ public class LoginRepositioy implements BaseRepository {
 
     private MutableLiveData<User> loginBeanMutableLiveData = new MutableLiveData<>();
 
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
-
     public LoginRepositioy(LoginApi loginApi,CacheRepository cacheRepository){
         this.loginApi = loginApi;
         this.cacheRepository = cacheRepository;

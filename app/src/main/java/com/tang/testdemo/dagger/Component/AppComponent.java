@@ -3,6 +3,7 @@ package com.tang.testdemo.dagger.Component;
 import com.tang.testdemo.annotaion.App;
 import com.tang.testdemo.app.MyApplication;
 import com.tang.testdemo.dagger.Module.AppMoudle;
+import com.tang.testdemo.moudel.cache.CacheProviders;
 import com.tang.testdemo.repositorys.CacheRepository;
 
 import javax.inject.Named;
@@ -19,6 +20,8 @@ public interface AppComponent {
     void inject(MyApplication application);
 
     CacheRepository getCache();
+
+    CacheProviders getCacheProviders();
 
     @Named("GET")
     Interceptor getInterceptor();

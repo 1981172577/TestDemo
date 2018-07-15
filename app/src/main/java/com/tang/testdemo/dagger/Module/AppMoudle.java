@@ -1,6 +1,7 @@
 package com.tang.testdemo.dagger.Module;
 
 import android.annotation.SuppressLint;
+import android.app.Application;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.pm.PackageInfo;
@@ -11,6 +12,7 @@ import android.text.TextUtils;
 
 import com.tang.testdemo.annotaion.App;
 import com.tang.testdemo.app.MyApplication;
+import com.tang.testdemo.moudel.cache.CacheProviders;
 import com.tang.testdemo.repositorys.CacheRepository;
 import com.tang.testdemo.repositorys.impl.CacheRepositoryImpl;
 import com.tang.testdemo.utils.LogUtils;
@@ -33,6 +35,8 @@ import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
+import io.rx_cache2.internal.RxCache;
+import io.victoralbertos.jolyglot.GsonSpeaker;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -64,6 +68,14 @@ public class AppMoudle {
     public CacheRepository provideCacheRepository(MyApplication app) {
         String cachePath = app.getCacheDir().getAbsolutePath();
         return new CacheRepositoryImpl(cachePath);
+    }
+
+    @App
+    @Provides
+    public CacheProviders providerCacheProviders(MyApplication context){
+        return new RxCache.Builder()
+                .persistence(context.getFilesDir(), new GsonSpeaker())
+                .using(CacheProviders.class);
     }
 
     @App
